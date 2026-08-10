@@ -1,0 +1,214 @@
+<svg viewBox="0 0 1200 820" xmlns="http://www.w3.org/2000/svg">
+<defs>
+  <radialGradient id="skyGlow" cx="55%" cy="30%" r="75%">
+    <stop offset="0" stop-color="#7a2416"/>
+    <stop offset="45%" stop-color="#43100e"/>
+    <stop offset="100%" stop-color="#0c0403"/>
+  </radialGradient>
+  <linearGradient id="goldGradB" x1="0" y1="0" x2="0" y2="1">
+    <stop offset="0" stop-color="#f7dd94"/>
+    <stop offset="0.5" stop-color="#c9a227"/>
+    <stop offset="1" stop-color="#8a6b14"/>
+  </linearGradient>
+  <linearGradient id="redGradB" x1="0" y1="0" x2="1" y2="1">
+    <stop offset="0" stop-color="#6b1119"/>
+    <stop offset="1" stop-color="#9c1c28"/>
+  </linearGradient>
+  <radialGradient id="redFlagGradB" cx="35%" cy="30%" r="75%">
+    <stop offset="0" stop-color="#e2222f"/>
+    <stop offset="1" stop-color="#a4141f"/>
+  </radialGradient>
+  <linearGradient id="bottomFade" x1="0" y1="0" x2="0" y2="1">
+    <stop offset="0" stop-color="#0c0403" stop-opacity="0"/>
+    <stop offset="0.45" stop-color="#0c0403" stop-opacity="0.75"/>
+    <stop offset="1" stop-color="#080201" stop-opacity="0.97"/>
+  </linearGradient>
+  <linearGradient id="waterGrad" x1="0" y1="0" x2="0" y2="1">
+    <stop offset="0" stop-color="#3a0f0f"/>
+    <stop offset="1" stop-color="#0c0302"/>
+  </linearGradient>
+</defs>
+
+<!-- sky -->
+<rect width="1200" height="820" fill="url(#skyGlow)"/>
+
+<!-- stars -->
+<g fill="#f5e6c8" opacity="0.55">
+  <circle cx="90" cy="50" r="1.6"/><circle cx="180" cy="90" r="1.2"/>
+  <circle cx="260" cy="40" r="1.4"/><circle cx="1000" cy="60" r="1.6"/>
+  <circle cx="1080" cy="110" r="1.2"/><circle cx="1140" cy="45" r="1.4"/>
+  <circle cx="620" cy="30" r="1.2"/><circle cx="720" cy="70" r="1.4"/>
+</g>
+
+<!-- distant hills -->
+<path d="M0,430 Q150,395 320,420 T640,410 T960,425 T1200,405 L1200,470 L0,470 Z" fill="#2a0d0c" opacity="0.7"/>
+
+<!-- ================= HANNIBAL BUST SILHOUETTE ================= -->
+<g transform="translate(410,330) scale(1.05)">
+  <path d="M -70,-160 C -140,-190 -180,-230 -160,-262 C -138,-232 -108,-192 -88,-166 Z" fill="#3a150f" stroke="url(#goldGradB)" stroke-width="1.5" opacity="0.95"/>
+  <path d="M -20,-180 L 10,-170 L 15,-140 L 35,-110 L 55,-95 L 40,-80 L 45,-65 L 30,-50 L 5,-40 L -15,-20
+           L 95,12 L 118,62 L 122,150 L -150,150 L -150,52 L -62,-40 L -70,-160 Z" fill="#281109"/>
+  <path d="M -20,-180 L 10,-170 L 15,-140 L 35,-110 L 55,-95 L 40,-80 L 45,-65 L 30,-50 L 5,-40 L -15,-20"
+        fill="none" stroke="url(#goldGradB)" stroke-width="2.5" opacity="0.8" stroke-linejoin="round"/>
+</g>
+
+<!-- ================= RUINS / COLUMNS ================= -->
+<g fill="#1c0b09" stroke="url(#goldGradB)" stroke-width="0.6" opacity="0.98">
+  <rect x="561" y="356" width="140" height="16"/>
+  <g>
+    <rect x="569" y="368" width="24" height="188"/>
+    <rect x="624" y="368" width="24" height="188"/>
+    <rect x="679" y="368" width="24" height="188"/>
+    <rect x="740" y="392" width="22" height="164"/>
+    <rect x="798" y="404" width="20" height="152"/>
+    <rect x="852" y="380" width="22" height="176"/>
+  </g>
+  <g>
+    <rect x="561" y="356" width="32" height="10"/>
+    <rect x="616" y="356" width="32" height="10"/>
+    <rect x="671" y="356" width="32" height="10"/>
+    <rect x="732" y="380" width="30" height="10"/>
+    <rect x="790" y="392" width="28" height="10"/>
+    <rect x="844" y="368" width="30" height="10"/>
+  </g>
+  <g>
+    <rect x="565" y="552" width="32" height="10"/>
+    <rect x="620" y="552" width="32" height="10"/>
+    <rect x="675" y="552" width="32" height="10"/>
+    <rect x="736" y="552" width="30" height="10"/>
+    <rect x="794" y="552" width="28" height="10"/>
+    <rect x="848" y="552" width="30" height="10"/>
+  </g>
+</g>
+<g stroke="#3a1614" stroke-width="1" opacity="0.5">
+  <line x1="581" y1="368" x2="581" y2="556"/>
+  <line x1="636" y1="368" x2="636" y2="556"/>
+  <line x1="691" y1="368" x2="691" y2="556"/>
+</g>
+
+<!-- ================= MINARET TOWER ================= -->
+<g fill="#1c0b09" stroke="url(#goldGradB)" stroke-width="0.75" opacity="0.98">
+  <path d="M900,556 L900,300 Q900,260 928,260 Q956,260 956,300 L956,556 Z"/>
+  <rect x="890" y="546" width="76" height="14"/>
+  <rect x="884" y="330" width="88" height="14"/>
+  <rect x="892" y="392" width="72" height="8" opacity="0.6"/>
+  <ellipse cx="928" cy="322" rx="46" ry="10"/>
+  <path d="M902,262 Q928,196 954,262 Z"/>
+  <rect x="924" y="176" width="8" height="24"/>
+  <circle cx="928" cy="172" r="6"/>
+</g>
+
+<!-- water + ship -->
+<rect x="0" y="540" width="1200" height="20" fill="url(#waterGrad)"/>
+<g transform="translate(150,540)" fill="#170807">
+  <path d="M-95,10 Q0,34 95,10 L80,22 Q0,40 -80,22 Z"/>
+  <line x1="0" y1="10" x2="0" y2="-64" stroke="#170807" stroke-width="4"/>
+  <path d="M2,-60 L46,-16 L2,-16 Z"/>
+</g>
+
+<!-- ================= WAR ELEPHANT + ARMY ================= -->
+<g transform="translate(1075,400) scale(1.15)" fill="#1c0b09" stroke="url(#goldGradB)" stroke-width="1" opacity="0.98">
+  <ellipse cx="0" cy="30" rx="62" ry="34"/>
+  <circle cx="-46" cy="0" r="30"/>
+  <path d="M-58,-20 Q-88,-16 -84,8 Q-80,26 -62,20 Q-70,0 -58,-20 Z"/>
+  <path d="M-54,20 Q-64,44 -56,64 Q-52,74 -42,70" fill="none" stroke-width="9" stroke-linecap="round"/>
+  <rect x="-30" y="52" width="14" height="34" rx="4"/>
+  <rect x="0" y="54" width="14" height="36" rx="4"/>
+  <rect x="26" y="50" width="14" height="38" rx="4"/>
+  <rect x="-52" y="48" width="13" height="36" rx="4"/>
+  <!-- howdah + general -->
+  <rect x="-30" y="-46" width="60" height="24" rx="3" fill="#2a1108" stroke="url(#goldGradB)" stroke-width="1.5"/>
+  <circle cx="-6" cy="-64" r="10" fill="#2a1108" stroke="none"/>
+  <path d="M-6,-54 L-6,-30 M-6,-46 L10,-58" stroke="#2a1108" stroke-width="5" stroke-linecap="round"/>
+  <rect x="-40" y="-24" width="10" height="16" fill="#8a1420" stroke="none"/>
+</g>
+
+<!-- spearmen -->
+<g stroke="#1c0b09" stroke-width="4" stroke-linecap="round" opacity="0.95">
+  <line x1="1155" y1="556" x2="1155" y2="480"/><line x1="1155" y1="480" x2="1168" y2="440"/>
+  <line x1="1178" y1="556" x2="1178" y2="484"/><line x1="1178" y1="484" x2="1191" y2="444"/>
+</g>
+<g fill="#7a1420" opacity="0.9">
+  <circle cx="1157" cy="494" r="8"/>
+  <circle cx="1180" cy="498" r="8"/>
+</g>
+<g fill="#8a1420" stroke="url(#goldGradB)" stroke-width="1">
+  <path d="M1120,400 L1120,346 L1152,356 L1120,370 Z"/>
+</g>
+<text x="1125" y="358" font-family="Georgia,serif" font-size="9" font-weight="700" fill="#e8c14a">LT</text>
+
+<!-- bottom legibility fade -->
+<rect x="0" y="460" width="1200" height="360" fill="url(#bottomFade)"/>
+
+<!-- ================= ORNATE FRAME ================= -->
+<rect x="20" y="20" width="1160" height="780" rx="26" fill="none" stroke="url(#goldGradB)" stroke-width="6"/>
+<rect x="34" y="34" width="1132" height="752" rx="20" fill="none" stroke="url(#goldGradB)" stroke-width="1.5" opacity="0.8"/>
+<g fill="url(#goldGradB)">
+  <circle cx="20" cy="20" r="10"/><circle cx="1180" cy="20" r="10"/>
+  <circle cx="20" cy="800" r="10"/><circle cx="1180" cy="800" r="10"/>
+</g>
+
+<!-- ================= CORNER TUNISIA MEDALLION ================= -->
+<g transform="translate(96,96) rotate(-6)">
+  <circle r="66" fill="#3a1210" stroke="url(#goldGradB)" stroke-width="4"/>
+  <circle r="66" fill="#7a1e26" opacity="0.35"/>
+  <circle cx="6" cy="0" r="30" fill="#c9a9a3" opacity="0.55"/>
+  <circle cx="17" cy="0" r="27" fill="#3a1210" opacity="0.85"/>
+  <polygon transform="translate(3,0) scale(0.9)" opacity="0.55"
+    points="0.00,-14.00 3.23,-4.45 13.31,-4.33 5.23,1.70 8.23,11.33 0.00,5.50 -8.23,11.33 -5.23,1.70 -13.31,-4.33 -3.23,-4.45"
+    fill="#c9a9a3"/>
+</g>
+
+<!-- ================= AVATAR PLACEHOLDER ================= -->
+<g transform="translate(225,540)">
+  <circle r="103" fill="url(#goldGradB)"/>
+  <circle r="94" fill="#5865f2"/>
+  <g fill="#ffffff">
+    <ellipse cx="-27" cy="-5" rx="11" ry="14"/>
+    <ellipse cx="27" cy="-5" rx="11" ry="14"/>
+    <path d="M-39,27 Q0,56 39,27 Q39,42 0,49 Q-39,42 -39,27 Z"/>
+  </g>
+</g>
+
+<!-- ================= NAME RIBBON ================= -->
+<g>
+  <rect x="410" y="500" width="530" height="120" rx="8" fill="#0d0605" opacity="0.88" stroke="url(#goldGradB)" stroke-width="3"/>
+  <rect x="420" y="510" width="510" height="100" rx="5" fill="none" stroke="url(#goldGradB)" stroke-width="1" opacity="0.7"/>
+  <g fill="url(#goldGradB)">
+    <circle cx="410" cy="500" r="6"/><circle cx="940" cy="500" r="6"/>
+    <circle cx="410" cy="620" r="6"/><circle cx="940" cy="620" r="6"/>
+    <path d="M675,500 l8,-10 l8,10 l-8,8 Z"/>
+  </g>
+  <text x="675" y="578" font-family="Georgia, 'Times New Roman', serif" font-size="54" font-weight="700"
+        text-anchor="middle" fill="url(#goldGradB)">NEW MEMBER</text>
+</g>
+
+<!-- welcome script -->
+<text x="675" y="660" font-family="Georgia, 'Times New Roman', serif" font-size="40" font-style="italic"
+      text-anchor="middle" fill="#f2e8d3">Welcome to</text>
+
+<!-- ================= LT LOCKUP BOTTOM-LEFT ================= -->
+<g transform="translate(70,660) scale(0.42)">
+  <path d="M140,104 L140,90 L160,40 L180,68 L200,28 L220,68 L240,40 L260,90 L260,104 Z"
+        fill="url(#goldGradB)" stroke="#5c0f18" stroke-width="2" stroke-linejoin="round"/>
+  <rect x="140" y="104" width="120" height="13" fill="url(#goldGradB)" stroke="#5c0f18" stroke-width="2"/>
+  <circle cx="160" cy="40" r="5" fill="#c81324" stroke="url(#goldGradB)" stroke-width="1.5"/>
+  <circle cx="200" cy="28" r="6" fill="#c81324" stroke="url(#goldGradB)" stroke-width="1.5"/>
+  <circle cx="240" cy="40" r="5" fill="#c81324" stroke="url(#goldGradB)" stroke-width="1.5"/>
+  <polygon points="200.00,79.00 213.89,96.22 232.83,84.79 240.00,105.72 261.71,101.46 261.28,123.58 283.14,127.00 275.18,147.64 294.54,158.33 280.00,175.00 294.54,191.67 275.18,202.36 283.14,223.00 261.28,226.42 261.71,248.54 240.00,244.28 232.83,265.21 213.89,253.78 200.00,271.00 186.11,253.78 167.17,265.21 160.00,244.28 138.29,248.54 138.72,226.42 116.86,223.00 124.82,202.36 105.46,191.67 120.00,175.00 105.46,158.33 124.82,147.64 116.86,127.00 138.72,123.58 138.29,101.46 160.00,105.72 167.17,84.79 186.11,96.22"
+    fill="url(#redGradB)" stroke="url(#goldGradB)" stroke-width="3" stroke-linejoin="round"/>
+  <circle cx="200" cy="175" r="70" fill="none" stroke="url(#goldGradB)" stroke-width="5"/>
+  <circle cx="200" cy="175" r="66" fill="url(#redFlagGradB)"/>
+  <circle cx="200" cy="175" r="47" fill="#f5efe0"/>
+  <circle cx="200" cy="175" r="34" fill="#c81324"/>
+  <circle cx="216" cy="175" r="31" fill="#f5efe0"/>
+  <polygon transform="translate(204,175) scale(1.05)"
+    points="0.00,-14.00 3.23,-4.45 13.31,-4.33 5.23,1.70 8.23,11.33 0.00,5.50 -8.23,11.33 -5.23,1.70 -13.31,-4.33 -3.23,-4.45"
+    fill="#c81324" stroke="#7a0f18" stroke-width="0.6"/>
+  <text x="200" y="335" font-family="Georgia, 'Times New Roman', serif" font-size="78" font-weight="700"
+    text-anchor="middle" fill="url(#goldGradB)" stroke="#3a1006" stroke-width="2">LT</text>
+</g>
+<text x="230" y="700" font-family="Georgia, 'Times New Roman', serif" font-size="50" font-weight="700" fill="url(#goldGradB)">LEGENDS</text>
+<text x="230" y="748" font-family="Georgia, 'Times New Roman', serif" font-size="40" font-weight="700" letter-spacing="3" fill="#e2222f">TUNISIA</text>
+
+</svg>

@@ -1,0 +1,595 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>LEGENDS TUNISIA | LT Community</title>
+<link rel="icon" href="lt-icon-new.png" type="image/png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;600;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg: #0b0605;
+    --bg-alt: #150a09;
+    --panel: #1c100d;
+    --panel-border: #3d241c;
+    --text: #f2e8d3;
+    --muted: #b6a48f;
+    --accent: #c9a227;       /* gold */
+    --accent-bright: #e8c14a;
+    --accent2: #b5192a;      /* Tunisian flag red */
+    --accent2-bright: #e2222f;
+    --danger: #e2222f;
+    --radius: 16px;
+  }
+  *{margin:0;padding:0;box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    background:var(--bg);
+    color:var(--text);
+    font-family:'Inter',sans-serif;
+    overflow-x:hidden;
+  }
+  h1,h2,h3,.brand,.stat-num,.nav-links a,.btn,.rule-num,.step::before{font-family:'Cinzel',serif;}
+  a{text-decoration:none;color:inherit;}
+  ul{list-style:none;}
+  ::selection{background:var(--accent2-bright);color:#fff;}
+
+  .bg-glow{
+    position:fixed;inset:0;z-index:-2;
+    background:
+      radial-gradient(circle at 15% 15%, rgba(226,34,47,0.16), transparent 42%),
+      radial-gradient(circle at 85% 8%, rgba(201,162,39,0.16), transparent 38%),
+      radial-gradient(circle at 50% 95%, rgba(226,34,47,0.10), transparent 45%),
+      var(--bg);
+  }
+  .grid-overlay{
+    position:fixed;inset:0;z-index:-1;opacity:.5;
+    background-image:
+      repeating-linear-gradient(45deg, rgba(201,162,39,0.025) 0 2px, transparent 2px 40px),
+      repeating-linear-gradient(-45deg, rgba(201,162,39,0.025) 0 2px, transparent 2px 40px);
+    mask-image:radial-gradient(circle at 50% 0%, black, transparent 75%);
+  }
+
+  header{
+    position:fixed;top:0;left:0;right:0;z-index:100;
+    display:flex;align-items:center;justify-content:space-between;
+    padding:14px 6%;
+    backdrop-filter:blur(14px);
+    background:rgba(11,6,5,0.6);
+    border-bottom:1px solid rgba(201,162,39,0.15);
+  }
+  .brand{
+    display:flex;align-items:center;gap:12px;
+    font-size:21px;font-weight:700;letter-spacing:2px;
+    color:var(--accent-bright);
+  }
+  .brand img{width:44px;height:44px;flex:none;object-fit:contain;}
+  .nav-links{display:flex;gap:32px;font-weight:600;font-size:14.5px;letter-spacing:1px;}
+  .nav-links a{color:var(--muted);transition:color .2s;position:relative;padding-bottom:6px;}
+  .nav-links a::after{
+    content:'';position:absolute;left:0;bottom:0;width:100%;height:2px;border-radius:2px;
+    background:linear-gradient(90deg,var(--accent-bright),var(--accent2-bright));
+    transform:scaleX(0);transform-origin:left;transition:transform .25s ease;
+  }
+  .nav-links a:hover{color:var(--accent-bright);}
+  .nav-links a:hover::after{transform:scaleX(1);}
+  .nav-links a.active{color:var(--accent-bright);}
+  .nav-links a.active::after{transform:scaleX(1);}
+  .nav-cta{display:flex;align-items:center;gap:14px;}
+  .burger{display:none;flex-direction:column;gap:5px;cursor:pointer;}
+  .burger span{width:24px;height:2px;background:var(--text);}
+
+  .btn{
+    display:inline-flex;align-items:center;gap:8px;
+    padding:12px 26px;border-radius:8px;
+    font-weight:700;font-size:15px;letter-spacing:1px;
+    border:1px solid transparent;cursor:pointer;
+    transition:transform .15s ease, box-shadow .15s ease, background .15s ease;
+  }
+  .btn:active{transform:scale(0.97);}
+  .btn-primary{
+    background:linear-gradient(135deg,var(--accent2-bright),var(--accent2));
+    color:#fff;box-shadow:0 8px 24px -8px rgba(226,34,47,0.6);
+  }
+  .btn-primary:hover{box-shadow:0 10px 30px -6px rgba(226,34,47,0.85);}
+  .btn-gold{
+    background:linear-gradient(135deg,var(--accent-bright),var(--accent));
+    color:#241a05;box-shadow:0 8px 24px -8px rgba(201,162,39,0.6);
+  }
+  .btn-ghost{
+    background:transparent;border-color:var(--panel-border);color:var(--text);
+  }
+  .btn-ghost:hover{border-color:var(--accent);color:var(--accent-bright);}
+  .btn-sm{padding:8px 16px;font-size:13px;border-radius:7px;}
+
+  .hero{
+    min-height:100vh;
+    display:flex;flex-direction:column;align-items:center;justify-content:center;
+    text-align:center;padding:150px 6% 90px;
+    position:relative;
+    background:
+      linear-gradient(180deg, rgba(9,4,3,0.35) 0%, rgba(9,4,3,0.55) 55%, rgba(9,4,3,0.94) 100%),
+      url('site-bg.jpg') center 30%/cover no-repeat;
+  }
+  .hero::before{
+    content:'';position:absolute;inset:0;
+    background:radial-gradient(circle at 50% 40%, rgba(11,6,5,0) 0%, rgba(11,6,5,0.65) 78%);
+    pointer-events:none;
+  }
+  .hero > *{position:relative;z-index:1;}
+  .hero-logo{width:min(320px,72vw);height:auto;margin:0 auto 12px;filter:drop-shadow(0 14px 34px rgba(226,34,47,0.5));}
+  .tag{
+    display:inline-flex;align-items:center;gap:8px;
+    padding:8px 18px;border-radius:999px;
+    border:1px solid var(--panel-border);
+    background:rgba(201,162,39,0.08);
+    color:var(--accent-bright);font-size:12.5px;font-weight:700;
+    letter-spacing:2px;text-transform:uppercase;
+    margin-bottom:26px;
+  }
+  .tag .live-dot{width:8px;height:8px;border-radius:50%;background:var(--accent2-bright);box-shadow:0 0 8px var(--accent2-bright);}
+  .hero h1{
+    font-size:clamp(42px,7.5vw,80px);
+    line-height:1.05;font-weight:800;letter-spacing:2px;
+  }
+  .hero h1 .gold{color:var(--accent-bright);}
+  .hero h1 .red{color:var(--accent2-bright);}
+  .hero p{
+    max-width:640px;margin:26px auto 40px;
+    color:var(--muted);font-size:17px;line-height:1.8;
+  }
+  .hero-actions{display:flex;gap:16px;flex-wrap:wrap;justify-content:center;}
+
+  .stats{
+    display:grid;grid-template-columns:repeat(4,1fr);
+    gap:1px;background:var(--panel-border);
+    border:1px solid var(--panel-border);border-radius:var(--radius);
+    overflow:hidden;margin:70px 6% 100px;
+  }
+  .stat{background:var(--panel);padding:32px 20px;text-align:center;}
+  .stat-num{font-size:34px;font-weight:700;color:var(--text);}
+  .stat-num.accent{color:var(--accent2-bright);}
+  .stat-label{margin-top:8px;color:var(--muted);font-size:12.5px;letter-spacing:1.5px;text-transform:uppercase;font-family:'Inter',sans-serif;}
+
+  section{padding:100px 6%;}
+  .section-head{text-align:center;max-width:640px;margin:0 auto 60px;}
+  .eyebrow{color:var(--accent-bright);font-weight:700;letter-spacing:3px;text-transform:uppercase;font-size:12.5px;font-family:'Cinzel',serif;}
+  .section-head h2{font-size:clamp(28px,4vw,42px);margin-top:14px;font-weight:700;}
+  .section-head p{color:var(--muted);margin-top:16px;font-size:16px;line-height:1.7;}
+
+  .features-grid{
+    display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
+    gap:24px;max-width:1200px;margin:0 auto;
+  }
+  .feature-card{
+    background:var(--panel);border:1px solid var(--panel-border);
+    border-radius:var(--radius);padding:32px 26px;
+    transition:transform .2s ease, border-color .2s ease;
+  }
+  .feature-card:hover{transform:translateY(-6px);border-color:var(--accent);}
+  .feature-icon{
+    width:50px;height:50px;border-radius:12px;
+    display:flex;align-items:center;justify-content:center;
+    background:linear-gradient(135deg,rgba(201,162,39,0.20),rgba(226,34,47,0.18));
+    margin-bottom:18px;font-size:24px;
+    border:1px solid var(--panel-border);
+  }
+  .feature-card h3{font-size:19px;font-weight:600;margin-bottom:10px;font-family:'Cinzel',serif;}
+  .feature-card p{color:var(--muted);font-size:14.5px;line-height:1.7;}
+
+  .rules-note{
+    max-width:700px;margin:0 auto 34px;text-align:center;
+    background:rgba(201,162,39,0.08);border:1px solid var(--panel-border);
+    border-radius:12px;padding:16px 22px;color:var(--muted);font-size:13.5px;line-height:1.6;
+  }
+  .rules-note b{color:var(--accent-bright);}
+  .rules-wrap{max-width:980px;margin:0 auto;}
+  .rules-tabs{display:flex;gap:10px;justify-content:center;flex-wrap:wrap;margin-bottom:40px;}
+  .rule-tab{
+    padding:10px 22px;border-radius:999px;border:1px solid var(--panel-border);
+    color:var(--muted);font-weight:600;font-size:13.5px;letter-spacing:.5px;cursor:pointer;
+    background:var(--panel);transition:all .2s;
+  }
+  .rule-tab.active{background:var(--accent2-bright); color:#fff;border-color:var(--accent2-bright);}
+  .rule-panel{display:none;}
+  .rule-panel.active{display:grid;gap:14px;}
+  .rule-item{
+    display:flex;gap:18px;align-items:flex-start;
+    background:var(--panel);border:1px solid var(--panel-border);
+    border-radius:14px;padding:20px 24px;
+  }
+  .rule-num{
+    flex:none;width:36px;height:36px;border-radius:8px;
+    background:rgba(226,34,47,0.15);color:var(--accent-bright);
+    display:flex;align-items:center;justify-content:center;
+    font-weight:700;font-size:18px;
+  }
+  .rule-item h4{font-size:16px;font-weight:600;margin-bottom:4px;font-family:'Inter',sans-serif;}
+  .rule-item p{color:var(--muted);font-size:14px;line-height:1.6;}
+  .rule-severity{
+    margin-left:auto;flex:none;font-size:11px;font-weight:700;letter-spacing:1px;
+    text-transform:uppercase;padding:5px 10px;border-radius:6px;align-self:center;
+    font-family:'Inter',sans-serif;
+  }
+  .sev-low{background:rgba(201,162,39,0.15);color:var(--accent-bright);}
+  .sev-med{background:rgba(210,140,40,0.15);color:#e0a53f;}
+  .sev-high{background:rgba(226,34,47,0.15);color:var(--danger);}
+
+  .join-steps{
+    display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+    gap:26px;max-width:1100px;margin:0 auto;counter-reset:step;
+  }
+  .step{
+    position:relative;background:var(--panel);border:1px solid var(--panel-border);
+    border-radius:var(--radius);padding:34px 24px;text-align:center;
+  }
+  .step::before{
+    counter-increment:step;content:counter(step);
+    width:40px;height:40px;border-radius:50%;
+    background:linear-gradient(135deg,var(--accent2-bright),var(--accent2));
+    color:#fff;display:flex;align-items:center;justify-content:center;
+    font-weight:700;font-size:16px;
+    margin:0 auto 18px;
+  }
+  .step h4{font-size:17px;margin-bottom:8px;font-weight:600;font-family:'Inter',sans-serif;}
+  .step p{color:var(--muted);font-size:14px;line-height:1.6;}
+
+  .staff-grid{
+    display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));
+    gap:20px;max-width:900px;margin:0 auto;
+  }
+  .staff-card{
+    background:var(--panel);border:1px solid var(--panel-border);
+    border-radius:14px;padding:24px;text-align:center;
+  }
+  .staff-avatar{
+    width:56px;height:56px;border-radius:50%;margin:0 auto 14px;
+    background:linear-gradient(135deg,var(--accent-bright),var(--accent2-bright));
+    display:flex;align-items:center;justify-content:center;font-weight:700;font-size:20px;color:#1b140d;
+    font-family:'Cinzel',serif;
+  }
+  .staff-role{color:var(--accent-bright);font-size:11.5px;font-weight:700;letter-spacing:1px;text-transform:uppercase;margin-top:4px;font-family:'Inter',sans-serif;}
+
+  .cta{
+    max-width:1100px;margin:0 auto;border-radius:24px;
+    padding:70px 6%;text-align:center;
+    background:linear-gradient(135deg, rgba(226,34,47,0.16), rgba(201,162,39,0.10));
+    border:1px solid var(--panel-border);position:relative;overflow:hidden;
+  }
+  .cta h2{font-size:clamp(26px,4vw,40px);font-weight:700;margin-bottom:14px;}
+  .cta p{color:var(--muted);max-width:520px;margin:0 auto 30px;}
+
+  footer{padding:60px 6% 30px;border-top:1px solid var(--panel-border);}
+  .footer-grid{
+    display:flex;justify-content:space-between;flex-wrap:wrap;gap:40px;
+    max-width:1200px;margin:0 auto 40px;
+  }
+  .footer-col h5{font-size:13px;letter-spacing:1.5px;text-transform:uppercase;color:var(--accent-bright);margin-bottom:16px;font-family:'Cinzel',serif;}
+  .footer-col a{display:block;color:var(--muted);font-size:14px;margin-bottom:10px;transition:color .2s;}
+  .footer-col a:hover{color:var(--accent-bright);}
+  .footer-bottom{
+    max-width:1200px;margin:0 auto;padding-top:24px;border-top:1px solid var(--panel-border);
+    display:flex;justify-content:space-between;flex-wrap:wrap;gap:12px;
+    color:var(--muted);font-size:13px;
+  }
+  .socials{display:flex;gap:14px;}
+  .socials a{
+    width:36px;height:36px;border-radius:9px;border:1px solid var(--panel-border);
+    display:flex;align-items:center;justify-content:center;color:var(--muted);
+    transition:all .2s;
+  }
+  .socials a:hover{color:var(--accent-bright);border-color:var(--accent);background:rgba(201,162,39,0.1);}
+
+  @media (max-width:860px){
+    .nav-links{display:none;}
+    .burger{display:flex;}
+    .stats{grid-template-columns:repeat(2,1fr);}
+  }
+</style>
+</head>
+<body>
+
+<div class="bg-glow"></div>
+<div class="grid-overlay"></div>
+
+<header>
+  <a href="#top" class="brand">
+    <img src="lt-icon-new.png" alt="LT crest">
+    LEGENDS TUNISIA
+  </a>
+  <nav class="nav-links">
+    <a href="#about">About</a>
+    <a href="#features">Community</a>
+    <a href="#rules">Rules</a>
+    <a href="#join">Join</a>
+    <a href="#staff">Staff</a>
+  </nav>
+  <div class="nav-cta">
+    <a href="https://discord.com/invite/gPk829GyWN" target="_blank" rel="noopener" class="btn btn-ghost btn-sm">Discord</a>
+    <a href="#join" class="btn btn-primary btn-sm">Join Now</a>
+  </div>
+  <div class="burger" id="burger"><span></span><span></span><span></span></div>
+</header>
+
+<main id="top">
+
+  <!-- HERO -->
+  <section class="hero" id="about">
+    <img src="lt-logo-trimmed.png" alt="Legends Tunisia crest" class="hero-logo">
+    <div class="tag"><span class="live-dot"></span> Tunisia's Gaming &amp; Esports Community</div>
+    <h1><span class="gold">LEGENDS</span> <span class="red">TUNISIA</span></h1>
+    <p>A Discord home built for Tunisian gamers — general hangouts, giveaways, clip highlights, an AI assistant, real support tickets, and a crest we're proud of. Built on Carthaginian pride, run for the community.</p>
+    <div class="hero-actions">
+      <a href="https://discord.com/invite/gPk829GyWN" target="_blank" rel="noopener" class="btn btn-primary">Join the Discord</a>
+      <a href="#rules" class="btn btn-ghost">Read the Rules</a>
+    </div>
+  </section>
+
+  <div class="stats">
+    <div class="stat"><div class="stat-num accent" id="memberCount">194</div><div class="stat-label">Members</div></div>
+    <div class="stat"><div class="stat-num" id="onlineCount">53</div><div class="stat-label">Online Now</div></div>
+    <div class="stat"><div class="stat-num">2026</div><div class="stat-label">Est. Founded</div></div>
+    <div class="stat"><div class="stat-num">TN</div><div class="stat-label">Made in Tunisia</div></div>
+  </div>
+
+  <!-- FEATURES -->
+  <section id="features">
+    <div class="section-head">
+      <div class="eyebrow">What's Inside</div>
+      <h2>Everything the server offers</h2>
+      <p>Built around the channels members actually use — chat, clips, giveaways, and real support when something goes wrong.</p>
+    </div>
+    <div class="features-grid">
+      <div class="feature-card">
+        <div class="feature-icon">📢</div>
+        <h3>Announcements &amp; Partnerships</h3>
+        <p>Stay current on server news, updates, and partnered communities without digging through chat history.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">🎙️</div>
+        <h3>General Chat &amp; Voice Hangouts</h3>
+        <p>Active text channels and voice rooms for day-to-day hangouts, not just event nights.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">🎁</div>
+        <h3>Giveaways</h3>
+        <p>Regular giveaways with a dedicated feedback channel so results and prize delivery stay transparent.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">🎬</div>
+        <h3>Clips &amp; Highlights</h3>
+        <p>Drop your best plays and clutch moments — the community's own highlight reel, member-submitted.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">🤖</div>
+        <h3>AI Assistant Channel</h3>
+        <p>A built-in AI channel for quick questions, so you're not waiting on a human to answer the basics.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">🎫</div>
+        <h3>Real Support Tickets</h3>
+        <p>Dedicated support and ticket-report channels — issues get tracked and resolved, not lost in general chat.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">🏅</div>
+        <h3>Roles &amp; Voice Levels</h3>
+        <p>Self-serve roles, custom nicknames, and a voice-activity level system that rewards showing up.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">🛡️</div>
+        <h3>Logged Moderation</h3>
+        <p>Punishments are tracked in their own channel, so enforcement stays consistent and visible.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- RULES -->
+  <section id="rules">
+    <div class="section-head">
+      <div class="eyebrow">📜 Read Before You Join 📜</div>
+      <h2>Server Rules</h2>
+      <p>Welcome to the server! To ensure this place remains a safe, respectful, and fun environment for everyone, please read and strictly follow the rules below.</p>
+    </div>
+    <div class="rules-wrap">
+      <div class="rule-panel active" style="display:grid;gap:14px;">
+        <div class="rule-item">
+          <div class="rule-num">🚫</div>
+          <div><h4>Strictly No Blasphemy or Religious Slurs</h4><p>Respecting beliefs is a red line. Cursing or insulting God or religions in any form is strictly prohibited. Violating this rule will result in an immediate ban.</p></div>
+          <div class="rule-severity sev-high">Instant Ban</div>
+        </div>
+        <div class="rule-item">
+          <div class="rule-num">🚫</div>
+          <div><h4>No Cursing Mothers or Families</h4><p>Members' families are strictly off-limits, even as a joke. Cursing mothers or insulting anyone's family is completely forbidden. Conversations must remain respectful at all times.</p></div>
+          <div class="rule-severity sev-high">High</div>
+        </div>
+        <div class="rule-item">
+          <div class="rule-num">🚫</div>
+          <div><h4>No Foul Language (Especially Around Girls)</h4><p>We aim to build a respectful community; therefore, the use of profanity and inappropriate words is banned. We strongly emphasize maintaining utmost respect and politeness, especially in channels where girls are present.</p></div>
+          <div class="rule-severity sev-med">Medium</div>
+        </div>
+        <div class="rule-item">
+          <div class="rule-num">🚫</div>
+          <div><h4>No Server Advertising or DM Promoting</h4><p>Advertising or promoting other Discord servers within this server is strictly forbidden. Sending server invite links in DMs to members you interact with here is also not allowed.</p></div>
+          <div class="rule-severity sev-med">Medium</div>
+        </div>
+        <div class="rule-item">
+          <div class="rule-num">🚫</div>
+          <div><h4>No NSFW, Gore, or Disturbing Content in DMs</h4><p>Sending inappropriate, explicit/NSFW content, or violent and disturbing material (such as crimes, murder, or gore) to any member of this server via DMs is strictly prohibited.</p></div>
+          <div class="rule-severity sev-high">High</div>
+        </div>
+      </div>
+      <div class="rules-note" style="margin-top:30px;margin-bottom:0;">
+        💡 <b>Important Note:</b> The rules apply to absolutely everyone. Even if it is my own brother, I will not forgive or make exceptions!
+      </div>
+    </div>
+  </section>
+
+  <!-- JOIN -->
+  <section id="join">
+    <div class="section-head">
+      <div class="eyebrow">Getting Started</div>
+      <h2>Join in three steps</h2>
+    </div>
+    <div class="join-steps">
+      <div class="step">
+        <h4>Open the Discord</h4>
+        <p>Use the "Join the Discord" button above to enter the server.</p>
+      </div>
+      <div class="step">
+        <h4>Read #server-rules</h4>
+        <p>Two minutes now saves you a warning later — check the rules channel before posting.</p>
+      </div>
+      <div class="step">
+        <h4>Grab your roles</h4>
+        <p>Set your nickname, pick your roles in #roles, and jump into #general or a voice channel.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- STAFF -->
+  <section id="staff">
+    <div class="section-head">
+      <div class="eyebrow">Meet The Team</div>
+      <h2>Staff &amp; Support</h2>
+      <p>Placeholder roles below — swap in real names/avatars whenever you're ready.</p>
+    </div>
+    <div class="staff-grid">
+      <div class="staff-card"><div class="staff-avatar">H</div><div>Head Admin</div><div class="staff-role">Admin</div></div>
+      <div class="staff-card"><div class="staff-avatar">T</div><div>Trial Staff</div><div class="staff-role">Trial</div></div>
+      <div class="staff-card"><div class="staff-avatar">S</div><div>Staff Team</div><div class="staff-role">Staff</div></div>
+      <div class="staff-card"><div class="staff-avatar">M</div><div>Moderator</div><div class="staff-role">Moderation</div></div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section>
+    <div class="cta">
+      <h2>Ready to join Legends Tunisia?</h2>
+      <p>Hop in the Discord, read the rules, and say hello — the community's waiting.</p>
+      <div class="hero-actions" style="justify-content:center;">
+        <a href="https://discord.com/invite/gPk829GyWN" target="_blank" rel="noopener" class="btn btn-primary">Join the Discord</a>
+        <a href="#rules" class="btn btn-ghost">Review the Rules</a>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <div class="footer-grid">
+    <div class="footer-col">
+      <h5>Legends Tunisia</h5>
+      <a href="#about">About</a>
+      <a href="#rules">Rules</a>
+      <a href="#join">How to Join</a>
+    </div>
+    <div class="footer-col">
+      <h5>Community</h5>
+      <a href="https://discord.com/invite/gPk829GyWN" target="_blank" rel="noopener">Discord</a>
+      <a href="#features">Giveaways</a>
+      <a href="#staff">Staff Team</a>
+    </div>
+    <div class="footer-col">
+      <h5>Support</h5>
+      <a href="#">Open a Ticket</a>
+      <a href="#">Report an Issue</a>
+      <a href="#">Partnerships</a>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span>© 2026 Legends Tunisia (LT Community). Fan-run gaming community — not affiliated with Discord Inc.</span>
+    <div class="socials">
+      <a href="https://discord.com/invite/gPk829GyWN" target="_blank" rel="noopener" title="Discord">D</a>
+    </div>
+  </div>
+</footer>
+
+<script>
+  document.querySelectorAll('.rule-tab').forEach(tab=>{
+    tab.addEventListener('click', ()=>{
+      document.querySelectorAll('.rule-tab').forEach(t=>t.classList.remove('active'));
+      document.querySelectorAll('.rule-panel').forEach(p=>p.classList.remove('active'));
+      tab.classList.add('active');
+      document.querySelector('.rule-panel[data-panel="'+tab.dataset.tab+'"]').classList.add('active');
+    });
+  });
+
+  // ===== LIVE DISCORD MEMBER / ONLINE COUNT =====
+  // No bot needed — Discord's public invite endpoint returns live counts for free.
+  // Set this to your server's permanent invite CODE ONLY (the part after discord.gg/),
+  // e.g. for https://discord.gg/abc123 set DISCORD_INVITE_CODE = "abc123".
+  // Use a permanent invite (Server Settings > Invites), not one that expires or has a use limit.
+  const DISCORD_INVITE_CODE = "gPk829GyWN";
+
+  const memberCountEl = document.getElementById('memberCount');
+  const onlineCountEl = document.getElementById('onlineCount');
+
+  async function updateLiveCounts(){
+    if(!DISCORD_INVITE_CODE || DISCORD_INVITE_CODE === "REPLACE_WITH_YOUR_INVITE_CODE") return;
+    try{
+      const res = await fetch(`https://discord.com/api/v10/invites/${DISCORD_INVITE_CODE}?with_counts=true`);
+      if(!res.ok) throw new Error('bad response');
+      const data = await res.json();
+      if(typeof data.approximate_member_count === 'number'){
+        memberCountEl.innerText = data.approximate_member_count.toLocaleString();
+      }
+      if(typeof data.approximate_presence_count === 'number'){
+        onlineCountEl.innerText = data.approximate_presence_count.toLocaleString();
+      }
+    }catch(e){
+      // Fetch failed (invalid code, network, or CORS) — silently keep the static fallback numbers.
+    }
+  }
+  updateLiveCounts();
+  setInterval(updateLiveCounts, 60000);
+
+  const burger = document.getElementById('burger');
+  const navLinks = document.querySelector('.nav-links');
+  const navAnchors = navLinks.querySelectorAll('a');
+
+  burger.addEventListener('click', ()=>{
+    if(navLinks.style.display === 'flex'){
+      navLinks.style.display = 'none';
+    } else {
+      navLinks.style.display = 'flex';
+      navLinks.style.position = 'fixed';
+      navLinks.style.top = '70px';
+      navLinks.style.left = '0';
+      navLinks.style.right = '0';
+      navLinks.style.background = '#150a09';
+      navLinks.style.flexDirection = 'column';
+      navLinks.style.padding = '24px 6%';
+      navLinks.style.borderBottom = '1px solid #3d241c';
+    }
+  });
+
+  // Close the mobile menu after a link is tapped
+  navAnchors.forEach(a=>{
+    a.addEventListener('click', ()=>{
+      if(window.innerWidth <= 860){
+        navLinks.style.display = 'none';
+      }
+    });
+  });
+
+  // ===== SCROLL-SPY: light up + underline the nav link for the section in view =====
+  const spySections = [...navAnchors]
+    .map(a => document.querySelector(a.getAttribute('href')))
+    .filter(Boolean);
+
+  const spyObserver = new IntersectionObserver((entries)=>{
+    entries.forEach(entry=>{
+      if(!entry.isIntersecting) return;
+      const id = entry.target.id;
+      navAnchors.forEach(a=>{
+        a.classList.toggle('active', a.getAttribute('href') === '#' + id);
+      });
+    });
+  }, { rootMargin: '-40% 0px -55% 0px', threshold: 0 });
+
+  spySections.forEach(sec => spyObserver.observe(sec));
+</script>
+
+</body>
+</html>
