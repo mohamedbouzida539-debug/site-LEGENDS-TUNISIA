@@ -281,11 +281,12 @@
     background:var(--bg-alt);border:1px solid var(--panel-border);border-radius:10px;
   }
   .staff-modal-avatar{
-    width:34px;height:34px;border-radius:50%;flex-shrink:0;
+    width:34px;height:34px;border-radius:50%;flex-shrink:0;overflow:hidden;
     background:linear-gradient(135deg,var(--accent-bright),var(--accent2-bright));
     display:flex;align-items:center;justify-content:center;font-weight:700;font-size:13px;color:#1b140d;
     font-family:'Cinzel',serif;
   }
+  .staff-modal-avatar img{width:100%;height:100%;object-fit:cover;}
   .staff-modal-member .name{font-size:14.5px;font-weight:600;}
   .staff-modal-member .handle{font-size:12.5px;color:var(--muted);}
 
@@ -645,22 +646,22 @@
   // ===== STAFF "VIEW MEMBERS" MODAL =====
   const staffMembers = {
     'head-admin': { label: 'Head Admin', people: [
-      { name: 'ᴸᵀ ⟶ Benzz', handle: '@benzz_fr' },
-      { name: 'ᴸᵀ ⟶ LOST', handle: '@mobo33.3' },
-      { name: 'ᴸᵀ ⟶ Ali', handle: '@alikhabir' },
-      { name: 'TheSuspect', handle: '@thesuspect9457' },
-      { name: 'LT AHMED', handle: '@ahmedtop0075' },
-      { name: 'ᴸᵀ ⟶ MrNova', handle: '@yanoocicha' },
-      { name: 'ᴸᵀ ⟶ hamda', handle: '@hamda3656' },
+      { name: 'ᴸᵀ ⟶ Benzz', handle: '@benzz_fr', avatar: 'https://cdn.discordapp.com/avatars/1346568369775579326/f5ed8508c56c57a537f00e3435c67202.webp?size=128' },
+      { name: 'ᴸᵀ ⟶ LOST', handle: '@mobo33.3', avatar: 'https://cdn.discordapp.com/avatars/1082751946802344006/58686d03d0b89789761d0bebb6c2b4a3.webp?size=128' },
+      { name: 'ᴸᵀ ⟶ Ali', handle: '@alikhabir', avatar: 'https://cdn.discordapp.com/avatars/876236130062856242/a39d70069d811d8720dd418700190beb.webp?size=128' },
+      { name: 'TheSuspect', handle: '@thesuspect9457', avatar: 'https://cdn.discordapp.com/avatars/455926065458708481/592e85f6fbb82ac133bca7fae6500786.webp?size=128' },
+      { name: 'LT AHMED', handle: '@ahmedtop0075', avatar: 'https://cdn.discordapp.com/guilds/1511674199914320082/users/1264711140085203038/avatars/a_8a2eccf973e440c57d955bbe39978fc8.webp?size=128' },
+      { name: 'ᴸᵀ ⟶ MrNova', handle: '@yanoocicha', avatar: 'https://cdn.discordapp.com/avatars/924069762575777792/9e4502b04be3f25cb8deca093238211d.webp?size=128' },
+      { name: 'ᴸᵀ ⟶ hamda', handle: '@hamda3656', avatar: 'https://cdn.discordapp.com/avatars/775428700044263514/033c0f9a46638237d7df5f472551d315.webp?size=128' },
     ]},
     'moderator': { label: 'Moderator', people: [
-      { name: 'ᴸᵀ ⟶ LAKMO', handle: '@ellakmo' },
+      { name: 'ᴸᵀ ⟶ LAKMO', handle: '@ellakmo', avatar: 'https://cdn.discordapp.com/avatars/527481493363228672/f3c77cd231794b9e6f8e95beb65b42b0.webp?size=128' },
     ]},
     'staff-team': { label: 'Staff Team', people: [
-      { name: 'ᴸᵀ ⟶ Mira', handle: '@nadine0714' },
+      { name: 'ᴸᵀ ⟶ Mira', handle: '@nadine0714', avatar: 'https://cdn.discordapp.com/avatars/1496591287183343717/de02788e803575dfbc6b6e01233e934d.webp?size=128' },
     ]},
     'trial-staff': { label: 'Trial Staff', people: [
-      { name: 'Kira', handle: '@n9___pop' },
+      { name: 'Kira', handle: '@n9___pop', avatar: 'https://cdn.discordapp.com/avatars/1520202658546192496/990ada4c8054baa2c396d1cc0d1d15d0.webp?size=128' },
     ]},
   };
 
@@ -676,7 +677,9 @@
     staffRoleLabel.textContent = data.people.length + (data.people.length === 1 ? ' member' : ' members');
     staffList.innerHTML = data.people.map(p => `
       <div class="staff-modal-member">
-        <div class="staff-modal-avatar">${p.name.charAt(0)}</div>
+        <div class="staff-modal-avatar">${p.avatar
+            ? `<img src="${p.avatar}" alt="${p.name}" onerror="this.replaceWith(Object.assign(document.createElement('span'),{textContent:'${p.name.charAt(0)}'}))">`
+            : p.name.charAt(0)}</div>
         <div>
           <div class="name">${p.name}</div>
           <div class="handle">${p.handle}</div>
