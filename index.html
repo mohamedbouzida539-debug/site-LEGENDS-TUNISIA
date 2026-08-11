@@ -250,6 +250,44 @@
     font-family:'Cinzel',serif;
   }
   .staff-role{color:var(--accent-bright);font-size:11.5px;font-weight:700;letter-spacing:1px;text-transform:uppercase;margin-top:4px;font-family:'Inter',sans-serif;}
+  .staff-view-btn{
+    margin-top:16px;padding:8px 16px;border-radius:8px;
+    background:transparent;border:1px solid var(--panel-border);color:var(--muted);
+    font-family:'Inter',sans-serif;font-size:12.5px;font-weight:600;letter-spacing:.3px;
+    cursor:pointer;transition:all .2s;
+  }
+  .staff-view-btn:hover{color:var(--accent-bright);border-color:var(--accent);background:rgba(201,162,39,0.1);}
+
+  .staff-modal-overlay{
+    display:none;position:fixed;inset:0;background:rgba(6,3,2,0.75);
+    backdrop-filter:blur(3px);z-index:100;
+    align-items:center;justify-content:center;padding:20px;
+  }
+  .staff-modal-overlay.open{display:flex;}
+  .staff-modal{
+    background:var(--panel);border:1px solid var(--panel-border);border-radius:var(--radius);
+    max-width:400px;width:100%;padding:28px;position:relative;
+  }
+  .staff-modal-close{
+    position:absolute;top:16px;right:16px;background:none;border:none;color:var(--muted);
+    font-size:20px;line-height:1;cursor:pointer;padding:4px;
+  }
+  .staff-modal-close:hover{color:var(--accent-bright);}
+  .staff-modal h3{font-family:'Cinzel',serif;font-size:20px;margin-bottom:4px;}
+  .staff-modal .staff-role{margin-top:0;margin-bottom:18px;}
+  .staff-modal-list{display:flex;flex-direction:column;gap:10px;}
+  .staff-modal-member{
+    display:flex;align-items:center;gap:12px;padding:10px 12px;
+    background:var(--bg-alt);border:1px solid var(--panel-border);border-radius:10px;
+  }
+  .staff-modal-avatar{
+    width:34px;height:34px;border-radius:50%;flex-shrink:0;
+    background:linear-gradient(135deg,var(--accent-bright),var(--accent2-bright));
+    display:flex;align-items:center;justify-content:center;font-weight:700;font-size:13px;color:#1b140d;
+    font-family:'Cinzel',serif;
+  }
+  .staff-modal-member .name{font-size:14.5px;font-weight:600;}
+  .staff-modal-member .handle{font-size:12.5px;color:var(--muted);}
 
   .cta{
     max-width:1100px;margin:0 auto;border-radius:24px;
@@ -459,12 +497,22 @@
       <p>Placeholder roles below — swap in real names/avatars whenever you're ready.</p>
     </div>
     <div class="staff-grid">
-      <div class="staff-card"><div class="staff-avatar">H</div><div>Head Admin</div><div class="staff-role">Admin</div></div>
-      <div class="staff-card"><div class="staff-avatar">M</div><div>Moderator</div><div class="staff-role">Moderation</div></div>
-      <div class="staff-card"><div class="staff-avatar">S</div><div>Staff Team</div><div class="staff-role">Staff</div></div>
-      <div class="staff-card"><div class="staff-avatar">T</div><div>Trial Staff</div><div class="staff-role">Trial</div></div>
+      <div class="staff-card"><div class="staff-avatar">H</div><div>Head Admin</div><div class="staff-role">Admin</div><button class="staff-view-btn" data-role="head-admin">View Members</button></div>
+      <div class="staff-card"><div class="staff-avatar">M</div><div>Moderator</div><div class="staff-role">Moderation</div><button class="staff-view-btn" data-role="moderator">View Members</button></div>
+      <div class="staff-card"><div class="staff-avatar">S</div><div>Staff Team</div><div class="staff-role">Staff</div><button class="staff-view-btn" data-role="staff-team">View Members</button></div>
+      <div class="staff-card"><div class="staff-avatar">T</div><div>Trial Staff</div><div class="staff-role">Trial</div><button class="staff-view-btn" data-role="trial-staff">View Members</button></div>
     </div>
   </section>
+
+  <!-- STAFF MEMBERS MODAL -->
+  <div class="staff-modal-overlay" id="staffModalOverlay">
+    <div class="staff-modal">
+      <button class="staff-modal-close" id="staffModalClose" aria-label="Close">&times;</button>
+      <h3 id="staffModalTitle">Role</h3>
+      <div class="staff-role" id="staffModalRole">Role</div>
+      <div class="staff-modal-list" id="staffModalList"></div>
+    </div>
+  </div>
 
   <!-- CTA -->
   <section id="join">
@@ -593,6 +641,62 @@
   }, { rootMargin: '-40% 0px -55% 0px', threshold: 0 });
 
   spySections.forEach(sec => spyObserver.observe(sec));
+
+  // ===== STAFF "VIEW MEMBERS" MODAL =====
+  // TODO: replace these placeholder names/handles with your real staff list.
+  const staffMembers = {
+    'head-admin': { label: 'Head Admin', people: [
+      { name: 'Add name here', handle: '@discord_handle' },
+    ]},
+    'moderator': { label: 'Moderator', people: [
+      { name: 'Add name here', handle: '@discord_handle' },
+      { name: 'Add name here', handle: '@discord_handle' },
+    ]},
+    'staff-team': { label: 'Staff Team', people: [
+      { name: 'Add name here', handle: '@discord_handle' },
+      { name: 'Add name here', handle: '@discord_handle' },
+    ]},
+    'trial-staff': { label: 'Trial Staff', people: [
+      { name: 'Add name here', handle: '@discord_handle' },
+    ]},
+  };
+
+  const staffOverlay = document.getElementById('staffModalOverlay');
+  const staffTitle = document.getElementById('staffModalTitle');
+  const staffRoleLabel = document.getElementById('staffModalRole');
+  const staffList = document.getElementById('staffModalList');
+
+  function openStaffModal(roleKey){
+    const data = staffMembers[roleKey];
+    if(!data) return;
+    staffTitle.textContent = data.label;
+    staffRoleLabel.textContent = data.people.length + (data.people.length === 1 ? ' member' : ' members');
+    staffList.innerHTML = data.people.map(p => `
+      <div class="staff-modal-member">
+        <div class="staff-modal-avatar">${p.name.charAt(0)}</div>
+        <div>
+          <div class="name">${p.name}</div>
+          <div class="handle">${p.handle}</div>
+        </div>
+      </div>
+    `).join('');
+    staffOverlay.classList.add('open');
+  }
+
+  function closeStaffModal(){
+    staffOverlay.classList.remove('open');
+  }
+
+  document.querySelectorAll('.staff-view-btn').forEach(btn=>{
+    btn.addEventListener('click', ()=> openStaffModal(btn.dataset.role));
+  });
+  document.getElementById('staffModalClose').addEventListener('click', closeStaffModal);
+  staffOverlay.addEventListener('click', (e)=>{
+    if(e.target === staffOverlay) closeStaffModal();
+  });
+  document.addEventListener('keydown', (e)=>{
+    if(e.key === 'Escape') closeStaffModal();
+  });
 </script>
 
 </body>
