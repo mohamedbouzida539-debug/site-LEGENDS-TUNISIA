@@ -198,12 +198,18 @@
     display:flex;gap:18px;align-items:flex-start;
     background:var(--panel);border:1px solid var(--panel-border);
     border-radius:14px;padding:20px 24px;
+    transition:transform .2s ease, border-color .2s ease, box-shadow .2s ease;
   }
+  .rule-item:hover{
+    transform:translateY(-4px) scale(1.01);border-color:var(--accent2);
+    box-shadow:0 14px 30px -12px rgba(226,34,47,0.45);
+  }
+  .rule-item:hover .rule-num{transform:scale(1.1);}
   .rule-num{
     flex:none;width:36px;height:36px;border-radius:8px;
     background:rgba(226,34,47,0.15);color:var(--accent-bright);
     display:flex;align-items:center;justify-content:center;
-    font-weight:700;font-size:18px;
+    font-weight:700;font-size:18px;transition:transform .2s ease;
   }
   .rule-item h4{font-size:16px;font-weight:600;margin-bottom:4px;font-family:'Inter',sans-serif;}
   .rule-item p{color:var(--muted);font-size:14px;line-height:1.6;}
@@ -242,12 +248,18 @@
   .staff-card{
     background:var(--panel);border:1px solid var(--panel-border);
     border-radius:14px;padding:24px;text-align:center;
+    transition:transform .2s ease, border-color .2s ease, box-shadow .2s ease;
   }
+  .staff-card:hover{
+    transform:translateY(-6px);border-color:var(--accent);
+    box-shadow:0 16px 32px -14px rgba(201,162,39,0.4);
+  }
+  .staff-card:hover .staff-avatar{transform:scale(1.1) rotate(-4deg);}
   .staff-avatar{
     width:56px;height:56px;border-radius:50%;margin:0 auto 14px;
     background:linear-gradient(135deg,var(--accent-bright),var(--accent2-bright));
     display:flex;align-items:center;justify-content:center;font-weight:700;font-size:20px;color:#1b140d;
-    font-family:'Cinzel',serif;
+    font-family:'Cinzel',serif;transition:transform .25s ease;
   }
   .staff-role{color:var(--accent-bright);font-size:11.5px;font-weight:700;letter-spacing:1px;text-transform:uppercase;margin-top:4px;font-family:'Inter',sans-serif;}
   .staff-view-btn{
