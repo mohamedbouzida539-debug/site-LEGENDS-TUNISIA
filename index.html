@@ -87,12 +87,13 @@
     border:1px solid transparent;cursor:pointer;
     transition:transform .15s ease, box-shadow .15s ease, background .15s ease;
   }
+  .btn:hover{transform:translateY(-3px);}
   .btn:active{transform:scale(0.97);}
   .btn-primary{
     background:linear-gradient(135deg,var(--accent2-bright),var(--accent2));
     color:#fff;box-shadow:0 8px 24px -8px rgba(226,34,47,0.6);
   }
-  .btn-primary:hover{box-shadow:0 10px 30px -6px rgba(226,34,47,0.85);}
+  .btn-primary:hover{box-shadow:0 14px 32px -8px rgba(226,34,47,0.85);}
   .btn-gold{
     background:linear-gradient(135deg,var(--accent-bright),var(--accent));
     color:#241a05;box-shadow:0 8px 24px -8px rgba(201,162,39,0.6);
@@ -100,7 +101,7 @@
   .btn-ghost{
     background:transparent;border-color:var(--panel-border);color:var(--text);
   }
-  .btn-ghost:hover{border-color:var(--accent);color:var(--accent-bright);}
+  .btn-ghost:hover{border-color:var(--accent);color:var(--accent-bright);box-shadow:0 10px 26px -12px rgba(201,162,39,0.5);}
   .btn-sm{padding:8px 16px;font-size:13px;border-radius:7px;}
 
   .hero{
@@ -229,14 +230,20 @@
   .step{
     position:relative;background:var(--panel);border:1px solid var(--panel-border);
     border-radius:var(--radius);padding:34px 24px;text-align:center;
+    transition:transform .2s ease, border-color .2s ease, box-shadow .2s ease;
   }
+  .step:hover{
+    transform:translateY(-6px);border-color:var(--accent2);
+    box-shadow:0 16px 32px -14px rgba(226,34,47,0.45);
+  }
+  .step:hover::before{transform:scale(1.1);}
   .step::before{
     counter-increment:step;content:counter(step);
     width:40px;height:40px;border-radius:50%;
     background:linear-gradient(135deg,var(--accent2-bright),var(--accent2));
     color:#fff;display:flex;align-items:center;justify-content:center;
     font-weight:700;font-size:16px;
-    margin:0 auto 18px;
+    margin:0 auto 18px;transition:transform .25s ease;
   }
   .step h4{font-size:17px;margin-bottom:8px;font-weight:600;font-family:'Inter',sans-serif;}
   .step p{color:var(--muted);font-size:14px;line-height:1.6;}
