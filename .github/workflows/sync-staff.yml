@@ -1,0 +1,44 @@
+name: Sync staff list from Discord
+
+on:
+  schedule:
+    # Every 20 minutes (falls inside the requested 15-30 min window).
+    - cron: '*/20 * * * *'
+  workflow_dispatch: {}
+
+permissions:
+  contents: write
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - name: Run sync script
+        env:
+          DISCORD_BOT_TOKEN: ${{ secrets.DISCORD_BOT_TOKEN }}
+          DISCORD_GUILD_ID: ${{ vars.DISCORD_GUILD_ID }}
+          ROLE_ID_HEAD_ADMIN: ${{ vars.ROLE_ID_HEAD_ADMIN }}
+          ROLE_ID_MODERATOR: ${{ vars.ROLE_ID_MODERATOR }}
+          ROLE_ID_STAFF_TEAM: ${{ vars.ROLE_ID_STAFF_TEAM }}
+          ROLE_ID_TRIAL_STAFF: ${{ vars.ROLE_ID_TRIAL_STAFF }}
+        run: node scripts/sync-staff.js
+
+      - name: Commit and push if changed
+        run: |
+          if git diff --quiet -- index.html; then
+            echo "No staff changes, skipping commit."
+            exit 0
+          fi
+          git config user.name "staff-sync-bot"
+          git config user.email "actions@users.noreply.github.com"
+          git add index.html
+          git commit -m "Auto-sync staff list from Discord"
+          git push
